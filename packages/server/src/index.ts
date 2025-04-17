@@ -3,7 +3,7 @@ import fastifyHelmet from "@fastify/helmet";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 
-const fastifyServer = fastify();
+const fastifyServer = fastify({ logger: true });
 
 await fastifyServer.register(fastifyHelmet);
 await fastifyServer.register(fastifySwagger, {

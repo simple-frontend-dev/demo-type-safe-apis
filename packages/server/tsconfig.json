@@ -1,6 +1,16 @@
 {
-  "extends": "@tsconfig/node-lts/tsconfig.json",
-
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "extends": [
+    "@tsconfig/node-lts/tsconfig.json",
+    "@tsconfig/strictest/tsconfig.json"
+  ],
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [
+    "./src"
+  ]
 }

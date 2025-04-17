@@ -4,8 +4,12 @@
   "description": "A demo of end-to-end type-safe APIs using open APIs spec",
   "author": "simple-frontend-dev",
   "license": "MIT",
+  "scripts": {
+    "build": "pnpm --filter @simple-frontend-dev/demo-type-safe-apis-server build",
+    "start": "pnpm --filter @simple-frontend-dev/demo-type-safe-apis-server start"
+  },
   "devDependencies": {
-    "prettier": "3.5.2",
-    "typescript": "^5.7.3"
+    "prettier": "3.5.3",
+    "typescript": "^5.8.3"
   }
 }
