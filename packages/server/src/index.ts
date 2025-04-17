@@ -15,7 +15,7 @@ await fastifyServer.register(fastifySwagger, {
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "https://demo-type-safe-apis-production.up.railway.app/",
         description: "Development server",
       },
     ],
@@ -145,7 +145,7 @@ fastifyServer.post<{
 await fastifyServer.ready();
 
 fastifyServer.listen(
-  { port: parseInt(<string>process.env["PORT"], 10) ?? 3000 },
+  { host: "::", port: Number(process.env["PORT"]) || 3000 },
   (err) => {
     if (err) {
       fastifyServer.log.error(err);

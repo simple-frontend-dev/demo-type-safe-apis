@@ -2,7 +2,7 @@ import type { paths } from "./api-types.js";
 import createClient from "openapi-fetch";
 
 const client = createClient<paths>({
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://demo-type-safe-apis-production.up.railway.app/",
 });
 
 type GetUserInput = paths["/users/{id}"]["get"]["parameters"]["path"];

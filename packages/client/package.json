@@ -8,7 +8,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "generate:types": "openapi-typescript http://localhost:3000/docs/json --output ./src/api-types.d.ts"
+    "generate:types": "openapi-typescript https://demo-type-safe-apis-production.up.railway.app/docs/json --output ./src/api-types.d.ts"
   },
   "devDependencies": {
     "@types/node": "^22.14.1",
