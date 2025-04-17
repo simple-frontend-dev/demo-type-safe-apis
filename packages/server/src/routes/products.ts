@@ -18,7 +18,6 @@ export async function productsRoutes(fastify: FastifyInstance) {
   fastify.addSchema({
     $id: "Product",
     type: "object",
-    required: ["id", "name", "price"],
     properties: {
       id: { type: "string" },
       name: { type: "string" },
@@ -29,7 +28,6 @@ export async function productsRoutes(fastify: FastifyInstance) {
   fastify.addSchema({
     $id: "ProductInput",
     type: "object",
-    required: ["name", "price"],
     properties: {
       name: { type: "string" },
       price: { type: "number" },
@@ -72,6 +70,7 @@ export async function productsRoutes(fastify: FastifyInstance) {
           properties: {
             id: { type: "string", description: "product id" },
           },
+          required: ["id"],
         },
         response: {
           200: {
@@ -109,6 +108,7 @@ export async function productsRoutes(fastify: FastifyInstance) {
         description: "add a product",
         body: {
           $ref: "ProductInput",
+          required: ["name", "price"],
         },
         response: {
           201: {
