@@ -5,48 +5,55 @@ const client = createClient<paths>({
   baseUrl: "https://demo-type-safe-apis-production.up.railway.app/",
 });
 
-type GetUserInput = paths["/users/{id}"]["get"]["parameters"]["path"];
-async function getUser({ id }: GetUserInput) {
+export async function getProducts() {
   const {
     data, // only present if 2XX response
     error, // only present if 4XX or 5XX response
-  } = await client.GET("/users/{id}", {
+  } = await client.GET("/products");
+  return { data, error };
+}
+const productsResponse = await getProducts();
+console.log("Products response :", productsResponse);
+
+type GetProductInput = paths["/products/{id}"]["get"]["parameters"]["path"];
+async function getProduct({ id }: GetProductInput) {
+  const {
+    data, // only present if 2XX response
+    error, // only present if 4XX or 5XX response
+  } = await client.GET("/products/{id}", {
     params: {
       path: { id },
     },
   });
   return { data, error };
 }
-
-const user1 = await getUser({ id: "1" });
-const user3 = await getUser({ id: "3" });
-
-console.log(user1);
-console.log(user3);
+const productResponse = await getProduct({ id: "1" });
+console.log("Product response :", productResponse);
 
 type CreateProductInput =
   paths["/products"]["post"]["requestBody"]["content"]["application/json"];
-
 async function createProduct({ product }: { product: CreateProductInput }) {
-  const { data, error } = await client.POST("/products", {
+  const {
+    data, // only present if 2XX response
+    error, // only present if 4XX or 5XX response
+  } = await client.POST("/products", {
     body: product,
   });
   return { data, error };
 }
 
-const validProduct = await createProduct({
+const validProductResponse = await createProduct({
   product: {
     name: "My New Post",
     price: 123,
   },
 });
+console.log("Valid product response :", validProductResponse);
 
-console.log(validProduct);
-
-const invalidProduct = await createProduct({
+const invalidProductResponse = await createProduct({
+  // @ts-expect-error - invalid product
   product: {
     name: "My New Post",
   },
 });
-
-console.log(invalidProduct);
+console.log("Invalid product response :", invalidProductResponse);

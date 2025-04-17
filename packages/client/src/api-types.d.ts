@@ -4,39 +4,107 @@
  */
 
 export interface paths {
-    "/users/{id}": {
+    "/products": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** @description get user by id */
+        /** @description get the list of products */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description the list of products */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["def-0"][];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** @description add a product */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["def-1"];
+                };
+            };
+            responses: {
+                /** @description the added product */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["def-0"];
+                    };
+                };
+                /** @description invalid product input response */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            message?: string;
+                        };
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/products/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description get a product by id */
         get: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    /** @description user id */
+                    /** @description product id */
                     id: string;
                 };
                 cookie?: never;
             };
             requestBody?: never;
             responses: {
-                /** @description response and schema description for successful response */
+                /** @description The product matching params id */
                 200: {
                     headers: {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": {
-                            id: string;
-                            name: string;
-                        };
+                        "application/json": components["schemas"]["def-0"];
                     };
                 };
-                /** @description response and schema description for error response */
+                /** @description product not found response */
                 404: {
                     headers: {
                         [name: string]: unknown;
@@ -57,70 +125,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/products": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** @description create product */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": {
-                        /** @description product name */
-                        name: string;
-                        /** @description product price */
-                        price: number;
-                    };
-                };
-            };
-            responses: {
-                /** @description response and schema description for successful response */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            id?: string;
-                            name?: string;
-                            price?: number;
-                        };
-                    };
-                };
-                /** @description response and schema description for error response */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            message?: string;
-                        };
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: never;
+    schemas: {
+        /** Product */
+        "def-0": {
+            id: string;
+            name: string;
+            price: number;
+        };
+        /** ProductInput */
+        "def-1": {
+            name: string;
+            price: number;
+        };
+    };
     responses: never;
     parameters: never;
     requestBodies: never;
