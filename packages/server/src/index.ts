@@ -144,9 +144,12 @@ fastifyServer.post<{
 
 await fastifyServer.ready();
 
-fastifyServer.listen({ port: 3000 }, (err) => {
-  if (err) {
-    fastifyServer.log.error(err);
-    process.exit(1);
-  }
-});
+fastifyServer.listen(
+  { port: parseInt(<string>process.env["PORT"], 10) ?? 3000 },
+  (err) => {
+    if (err) {
+      fastifyServer.log.error(err);
+      process.exit(1);
+    }
+  },
+);
