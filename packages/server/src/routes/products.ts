@@ -85,14 +85,13 @@ export async function productsRoutes(fastify: FastifyInstance) {
             properties: {
               message: { type: "string" },
             },
+            required: ["message"],
           },
         },
       },
     },
     async (request, reply) => {
-      const product = products.find(
-        (product) => product.id === request.params.id,
-      );
+      const product = products.find((product) => product.id === request.params.id);
       if (!product) {
         return reply.status(404).send({ message: "Product not found" });
       }
@@ -123,6 +122,7 @@ export async function productsRoutes(fastify: FastifyInstance) {
             properties: {
               message: { type: "string" },
             },
+            required: ["message"],
           },
         },
       },
@@ -130,9 +130,7 @@ export async function productsRoutes(fastify: FastifyInstance) {
     async (request, reply) => {
       const { name, price } = request.body;
       if (!name || !price) {
-        return reply
-          .status(400)
-          .send({ message: "Name and price are required" });
+        return reply.status(400).send({ message: "Name and price are required" });
       }
       const product = {
         id: id.toString(),
